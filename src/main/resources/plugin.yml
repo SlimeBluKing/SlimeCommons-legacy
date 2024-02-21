@@ -1,0 +1,9 @@
+name: SlimeCommons
+version: '${project.version}'
+main: com.slime.slimecommons.SlimeCommons
+api-version: '1.20'
+authors: [SlimeBluKing]
+description: 'Libs for SlimeBluKing''s plugins'
+depend:
+  - PlaceholderAPI
+  - WorldGuard
