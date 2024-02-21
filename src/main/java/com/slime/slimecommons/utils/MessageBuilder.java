@@ -8,10 +8,7 @@ public class MessageBuilder {
     private String msg;
 
     public MessageBuilder(String message) {
-        msg = translateColors(message);
-    }
-    public MessageBuilder(String prefix, String message) {
-        msg = translateColors(prefix + message);
+        msg = message;
     }
 
     public void parsePapi(Player player) {
@@ -27,7 +24,7 @@ public class MessageBuilder {
     }
 
     public void send(Player player) {
-        player.sendMessage(msg);
+        player.sendMessage(translateColors(msg));
     }
 
     public String getMsg(){
