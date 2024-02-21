@@ -10,6 +10,9 @@ public class MessageBuilder {
     public MessageBuilder(String message) {
         msg = translateColors(message);
     }
+    public MessageBuilder(String prefix, String message) {
+        msg = translateColors(prefix + message);
+    }
 
     public void parsePapi(Player player) {
         msg = PlaceholderAPI.setPlaceholders(player, msg);
