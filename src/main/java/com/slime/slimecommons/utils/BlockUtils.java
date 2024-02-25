@@ -44,44 +44,6 @@ public class BlockUtils {
         return false;
     }
 
-    public static List<Block> getBlocksInRadius(Location targetBlock, int radius){
-        List<Block> cubeBlocks = new ArrayList<>();
-
-        for(int x = -radius; x <= radius; x++){
-            for(int y = -radius; y <= radius; y++){
-                for(int z = -radius; z <= radius; z++){
-                    Block blockToSave = targetBlock.getWorld().getBlockAt(targetBlock.clone().add(x, y, z));
-
-                    cubeBlocks.add(blockToSave);
-                }
-            }
-        }
-
-        return cubeBlocks;
-    }
-
-    public static List<Block> getSphereInRadius(Location targetBlock, int radius){
-        List<Block> sphereBlocks = new ArrayList<>();
-
-        int centerX = targetBlock.getBlockX();
-        int centerY = targetBlock.getBlockY();
-        int centerZ = targetBlock.getBlockZ();
-
-        for (int x = centerX - radius; x <= centerX + radius; x++) {
-            for (int y = centerY - radius; y <= centerY + radius; y++) {
-                for (int z = centerZ - radius; z <= centerZ + radius ; z++) {
-                    if((centerX - x) * (centerX - x) + (centerY - y) * (centerY - y) + (centerZ - z) * (centerZ - z) <= radius * radius){
-                        Block blockToSave = targetBlock.getWorld().getBlockAt(targetBlock.clone().add(x, y, z));
-
-                        sphereBlocks.add(blockToSave);
-                    }
-                }
-            }
-        }
-
-        return sphereBlocks;
-    }
-
     public static List<Block> getBlocksInRadius(Location targetBlock, int radius, List<String> blacklistedMaterials){
         List<Block> cubeBlocks = new ArrayList<>();
 
@@ -100,6 +62,10 @@ public class BlockUtils {
         }
 
         return cubeBlocks;
+    }
+
+    public static List<Block> getBlocksInRadius(Location targetBlock, int radius){
+        return getBlocksInRadius(targetBlock, radius, new ArrayList<>());
     }
 
     public static List<Block> getSphereInRadius(Location targetBlock, int radius, List<String> blacklistedMaterials){
@@ -122,6 +88,10 @@ public class BlockUtils {
         }
 
         return sphereBlocks;
+    }
+
+    public static List<Block> getSphereInRadius(Location targetBlock, int radius){
+        return getSphereInRadius(targetBlock, radius, new ArrayList<>());
     }
 
     public static boolean checkMaterial(Block block, List<String> blacklistedMaterials){

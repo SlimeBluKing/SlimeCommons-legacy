@@ -1,22 +1,20 @@
 package com.slime.slimecommons;
 
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.slime.slimecommons.listeners.PlayerInteractListener;
+import com.slime.slimecommons.managers.YamlManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class SlimeCommons extends JavaPlugin {
-    private static WorldGuardPlugin worldGuard;
     private static SlimeCommons instance;
-
-    public static WorldGuardPlugin getWorldGuard(){
-        return worldGuard;
-    }
+    private YamlManager configManager;
 
     public static SlimeCommons getInstance(){
         return instance;
+    }
+    public YamlManager getConfigManager() {
+        return configManager;
     }
 
     public SlimeCommons(){
@@ -27,7 +25,6 @@ public final class SlimeCommons extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         loadConfig();
-        saveConfig();
         start();
     }
 
@@ -51,13 +48,10 @@ public final class SlimeCommons extends JavaPlugin {
             getPluginLoader().disablePlugin(this);
             throw new UnknownDependencyException("WorldGuard does not found");
         }
-
-        worldGuard = (WorldGuardPlugin)Bukkit.getPluginManager().getPlugin("WorldGuard");
     }
 
     private void loadConfig(){
-        getConfig().options().parseComments(true);
-        getConfig().options().copyDefaults(true);
+        configManager = new YamlManager(this,"config.yml");
     }
 
     @Override
