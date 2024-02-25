@@ -16,25 +16,25 @@ public class YamlManager {
     public YamlManager(JavaPlugin plugin, String fileName){
         instance = plugin;
         this.fileName = fileName;
-        loadConfigFile();
+        loadYamlFile();
     }
 
-    public void loadConfigFile() {
-        getConfigurationFile();
+    public void loadYamlFile() {
+        getYamlFile();
 
         if(!yamlFile.exists()) {
             instance.saveResource(fileName, false);
-            getConfigurationFile();
+            getYamlFile();
         }
 
-        getConfigData();
+        getYamlData();
     }
 
-    private void getConfigurationFile() {
+    private void getYamlFile() {
         yamlFile = new File(instance.getDataFolder(), fileName);
     }
 
-    private void getConfigData() {
+    private void getYamlData() {
         yaml = YamlConfiguration.loadConfiguration(yamlFile);
     }
 
@@ -47,7 +47,7 @@ public class YamlManager {
             yaml.set(path, defaultValue);
 
             try{
-                saveConfig();
+                saveYaml();
             } catch (IOException e){
                 instance.getLogger().severe(e.toString());
             }
@@ -63,13 +63,13 @@ public class YamlManager {
         yaml.set(path, value);
 
         try{
-            saveConfig();
+            saveYaml();
         } catch (IOException e){
             instance.getLogger().severe(e.toString());
         }
     }
 
-    public void saveConfig() throws IOException{
+    public void saveYaml() throws IOException{
         try {
             yaml.save(yamlFile);
         } catch (IOException e){
