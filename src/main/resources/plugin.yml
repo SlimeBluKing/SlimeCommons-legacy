@@ -7,3 +7,4 @@ description: 'Libs for SlimeBluKing''s plugins'
 depend:
   - PlaceholderAPI
   - WorldGuard
+  - Vautl

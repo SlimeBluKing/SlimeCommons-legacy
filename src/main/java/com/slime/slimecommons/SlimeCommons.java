@@ -2,19 +2,27 @@ package com.slime.slimecommons;
 
 import com.slime.slimecommons.listeners.PlayerInteractListener;
 import com.slime.slimecommons.managers.YamlManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.print.DocFlavor;
 
 public final class SlimeCommons extends JavaPlugin {
     private static SlimeCommons instance;
     private YamlManager configManager;
+    private Economy economy;
 
     public static SlimeCommons getInstance(){
         return instance;
     }
     public YamlManager getConfigManager() {
         return configManager;
+    }
+    public Economy getEconomy(){
+        return economy;
     }
 
     public SlimeCommons(){
@@ -48,6 +56,17 @@ public final class SlimeCommons extends JavaPlugin {
             getPluginLoader().disablePlugin(this);
             throw new UnknownDependencyException("WorldGuard does not found");
         }
+
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null){
+            getPluginLoader().disablePlugin(this);
+            throw new UnknownDependencyException("Vault does not found");
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if(rsp == null){
+            getPluginLoader().disablePlugin(this);
+            throw new UnknownDependencyException("Economy with Vault does not found");
+        }
+        economy = rsp.getProvider();
     }
 
     private void loadConfig(){
