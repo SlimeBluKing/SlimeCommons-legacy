@@ -6,7 +6,7 @@
 
     <groupId>com.slime</groupId>
     <artifactId>SlimeCommons</artifactId>
-    <version>0.1.4.4</version>
+    <version>0.1.4.4.1</version>
     <packaging>jar</packaging>
 
     <name>SlimeCommons</name>
