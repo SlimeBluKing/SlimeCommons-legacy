@@ -1,0 +1,10 @@
+# SlimeCommons messages
+
+prefix: "&8[&6SlimeCommons&8]&r"
+
+errors:
+  no_pex: "{prefix} &cNon hai il permesso"
+
+admin:
+  reload: "{prefix} &cPlugin ricaricato."
+  debug: "{prefix} &fDebug &2{value}"

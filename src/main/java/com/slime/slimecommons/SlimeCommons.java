@@ -1,7 +1,10 @@
 package com.slime.slimecommons;
 
+import com.slime.slimecommons.commands.AdminCommands;
+import com.slime.slimecommons.commands.tabcompleter.AdminCommandsCompleter;
 import com.slime.slimecommons.listeners.PlayerInteractListener;
 import com.slime.slimecommons.managers.YamlManager;
+import jdk.jfr.consumer.RecordedThread;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -9,10 +12,12 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.print.DocFlavor;
+import java.util.Objects;
 
 public final class SlimeCommons extends JavaPlugin {
     private static SlimeCommons instance;
     private YamlManager configManager;
+    private YamlManager messageManager;
     private Economy economy;
 
     public static SlimeCommons getInstance(){
@@ -20,6 +25,9 @@ public final class SlimeCommons extends JavaPlugin {
     }
     public YamlManager getConfigManager() {
         return configManager;
+    }
+    public YamlManager getMessageManager() {
+        return messageManager;
     }
     public Economy getEconomy(){
         return economy;
@@ -39,11 +47,17 @@ public final class SlimeCommons extends JavaPlugin {
     private void start(){
         getDependencies();
         getEvents();
+        getCommands();
         printLogo();
     }
 
     private void getEvents(){
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(), this);
+    }
+
+    private void getCommands() {
+        Objects.requireNonNull(getCommand("slimecommons")).setExecutor(new AdminCommands());
+        Objects.requireNonNull(getCommand("slimecommons")).setTabCompleter(new AdminCommandsCompleter());
     }
 
     private void getDependencies(){
@@ -71,6 +85,7 @@ public final class SlimeCommons extends JavaPlugin {
 
     private void loadConfig(){
         configManager = new YamlManager(this,"config.yml");
+        messageManager = new YamlManager(this, "messages.yml");
     }
 
     @Override
