@@ -41,6 +41,8 @@ public class Logging {
     }
 
     public static void debug(Plugin plugin, String log){
+        System.out.println();
+        System.out.println((boolean) SlimeCommons.getInstance().getConfigManager().getValue("debug"));
         if((boolean) SlimeCommons.getInstance().getConfigManager().getValue("debug")){
             plugin.getLogger().info("[DEBUG] " + log);
         }
