@@ -24,7 +24,7 @@ You can also add SlimeCommons as a Maven dependency:
     <dependency>
         <groupId>com.github.SlimeBluKing</groupId>
         <artifactId>SlimeCommons</artifactId>
-        <version>0.1.6-alpha</version>
+        <version>0.1.6.1-alpha</version>
     </dependency>
 </dependencies>
 ```
