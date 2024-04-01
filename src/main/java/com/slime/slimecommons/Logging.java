@@ -35,13 +35,13 @@ public class Logging {
     }
 
     public static void debug(String log) {
-        if((boolean) SlimeCommons.getInstance().getConfigManager().getValue("debug")){
+        if(SlimeCommons.getInstance().getConfigManager().getBoolean("debug")){
             Bukkit.getLogger().info("[DEBUG] " + log);
         }
     }
 
     public static void debug(Plugin plugin, String log){
-        if((boolean) SlimeCommons.getInstance().getConfigManager().getValue("debug")){
+        if(SlimeCommons.getInstance().getConfigManager().getBoolean("debug")){
             plugin.getLogger().info("[DEBUG] " + log);
         }
     }
