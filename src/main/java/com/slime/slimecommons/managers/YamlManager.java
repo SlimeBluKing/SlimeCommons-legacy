@@ -64,6 +64,10 @@ public class YamlManager {
         return yaml.getBoolean(path);
     }
 
+    public long getLong(String path){
+        return yaml.getLong(path);
+    }
+
     public double getDouble(String path) {
         return yaml.getDouble(path);
     }
